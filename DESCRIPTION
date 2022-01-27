@@ -1,0 +1,22 @@
+Package: weathRman
+Type: Package
+Title: Utilities for preparing weather data for crop modeling analysis
+Version: 0.0.0.9001
+Author: Phillip D. Alderman
+Maintainer: Phillip D. Alderman <phillip.alderman@okstate.edu>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: GPL (>=3)
+Encoding: UTF-8
+Imports:
+    dplyr,
+    lubridate,
+    nasapower,
+    stringr,
+    tibble
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
