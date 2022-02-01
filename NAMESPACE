@@ -3,6 +3,7 @@
 export(calc_tamp)
 export(calc_tav)
 export(get_nasa_power)
+export(lin_interp)
 export(m_s_to_km_d)
 importFrom(dplyr,"%>%")
 importFrom(dplyr,group_by)
