@@ -10,4 +10,4 @@ Future versions will include:
 
 - an interface to the Global Historical Climate Network (GHCN) daily dataset
 - a function for coercing existing data frames to a form suitable for use with the `write_wth()` function from the DSSAT R package ([https://cran.r-project.org/package=DSSAT](https://cran.r-project.org/package=DSSAT))
-- additional functions to facilitate unit conversion
+- additional functions to facilitate unit conversion and gap filling
