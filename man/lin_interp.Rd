@@ -2,10 +2,13 @@
 % Please edit documentation in R/gap_filling.R
 \name{lin_interp}
 \alias{lin_interp}
-\title{Linearly interpolate data}
+\title{Linearly interpolate data over dates}
 \usage{
 lin_interp(time_series)
 }
+\arguments{
+\item{time_series}{vector of data to be interpolated}
+}
 \description{
-Linearly interpolate data
+Linearly interpolate data over dates
 }

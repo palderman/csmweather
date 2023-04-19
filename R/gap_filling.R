@@ -1,4 +1,4 @@
-#' Linearly interpolate data
+#' Linearly interpolate data over dates
 #'
 #' @export
 #'
