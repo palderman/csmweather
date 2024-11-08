@@ -1,4 +1,4 @@
-# weathRman
+# csmweather
 
 The purpose of this package is to provide an interface to weather data sources and utilities for preparing data suitable for crop modeling.
 

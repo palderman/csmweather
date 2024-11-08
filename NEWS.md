@@ -1,4 +1,4 @@
-# weathRman 0.0.0.9002
+# csmweather 0.0.0.9002
 
 - Includes an interface to NASA POWER agroclimatology datasets (see https://power.larc.nasa.gov/)
 

@@ -6,6 +6,9 @@
 \usage{
 lin_interp(time_series)
 }
+\arguments{
+\item{time_series}{vector of data to be interpolated}
+}
 \description{
 Linearly interpolate data
 }
