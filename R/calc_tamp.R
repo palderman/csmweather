@@ -18,7 +18,7 @@ calc_tamp <- function(wth){
       TAIR = (TMAX + TMIN)/2}) |>
     # Aggregate by month
     aggregate(TAIR ~ MM,
-              FUN = \(.x) mean(.x, na.rm = TRUE))
+              FUN = \(.x) mean(.x, na.rm = TRUE)) |>
     # Pull out the monthly average temperature values
     with(TAIR) |>
     # Calculate half the difference between the highest and lowest monthly

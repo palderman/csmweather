@@ -25,8 +25,6 @@ utils::globalVariables(c("DATE", "YYYYMMDD", "SRAD", "ALLSKY_SFC_SW_DWN",
 #' @param INSI a four-digit character code to uniquely identify the
 #'   query location
 #'
-#' @importFrom nasapower get_power
-#'
 wth_nasa_power <- function(lat, long, start, end,
                            pars = c("PRECTOTCORR","T2M_MAX",
                                     "T2M_MIN","ALLSKY_SFC_SW_DWN",
