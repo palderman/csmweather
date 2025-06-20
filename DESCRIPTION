@@ -9,11 +9,7 @@ Description: More about what it does (maybe more than one line)
 License: GPL (>=3)
 Encoding: UTF-8
 Imports:
-    dplyr,
-    lubridate,
-    nasapower,
-    stringr,
-    tibble
+    curl
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2

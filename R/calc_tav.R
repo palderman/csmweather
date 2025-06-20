@@ -6,20 +6,17 @@ utils::globalVariables(c("TMAX", "TMIN", "TAIR", "TAVG"))
 #'   columns of date of measurement (DATE), daily maximum temperature (TMAX),
 #'   and daily minimum temperature (TMIN)
 #'
-#' @importFrom dplyr "%>%" mutate summarize pull
-#' @importFrom lubridate month
-#'
 #' @export
 #'
 calc_tav <- function(wth){
 
-  tav <- wth %>%
-    mutate(
+  tav <- wth |>
+    within({
       # Calculate daily average temperature
-      TAIR = (TMAX + TMIN)/2) %>%
-    summarize(TAVG = mean(TAIR, na.rm = TRUE)) %>%
-    # Pull out the monthly average temperature values
-    pull(TAVG)
+      TAIR = (TMAX + TMIN)/2}) |>
+    with({
+      mean(TAIR, na.rm = TRUE)
+      })
 
   return(tav)
 }
