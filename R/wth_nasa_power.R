@@ -83,13 +83,13 @@ wth_nasa_power <- function(lat, long, start, end,
                             "-99.0")) |>
     within({
       DATE = as.Date(sprintf("%4i%3.3i", YEAR, DOY), format = "%Y%j")
-      if("ALLSKY_SFC_SW_DWN" %in% pars) SRAD = ALLSKY_SFC_SW_DWN
-      if("T2M_MAX" %in% pars) TMAX = T2M_MAX
-      if("T2M_MIN" %in% pars) TMIN = T2M_MIN
-      if("PRECTOTCORR" %in% pars) RAIN = PRECTOTCORR
-      if("WS2M" %in% pars) WIND = m_s_to_km_d(WS2M)
-      if("RH2M" %in% pars) RHUM = RH2M
-      if("T2MDEW" %in% pars) DEWP = T2MDEW
+      if("ALLSKY_SFC_SW_DWN" %in% pars) SRAD = units::set_units(ALLSKY_SFC_SW_DWN, "MJ/m2/d")
+      if("T2M_MAX" %in% pars) TMAX = units::set_units(T2M_MAX, "Celsius")
+      if("T2M_MIN" %in% pars) TMIN = units::set_units(T2M_MIN, "Celsius")
+      if("PRECTOTCORR" %in% pars) RAIN = units::set_units(PRECTOTCORR, "mm")
+      if("WS2M" %in% pars) WIND = units::set_units(units::set_units(WS2M, "m/s"), "km/d")
+      if("RH2M" %in% pars) RHUM = units::set_units(RH2M, "percent")
+      if("T2MDEW" %in% pars) DEWP = units::set_units(T2MDEW, "Celsius")
       }) |>
     subset(select = c("DATE", names(wth_cols)))
 
@@ -112,9 +112,9 @@ wth_nasa_power <- function(lat, long, start, end,
     LONG = long,
     TAV = tav,
     AMP = amp,
-    ELEV = POWER_elev,
-    REFHT = 2,
-    WNDHT = 2,
+    ELEV = units::set_units(POWER_elev, "m"),
+    REFHT = units::set_units(2, "m"),
+    WNDHT = units::set_units(2, "m"),
     stringsAsFactors = FALSE
   )
 
