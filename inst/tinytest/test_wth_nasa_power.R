@@ -1,5 +1,7 @@
 library(tinytest)
 
+if(tinytest::at_home()){
+
 expected_output <- structure(list(
   DATE = structure(
     c(5479, 5480, 5481, 5482, 5483, 5484, 5485, 5486, 5487,
@@ -350,3 +352,5 @@ actual_output <- csmweather::wth_nasa_power(lat = -17.82, long = 30.92,
 attr(actual_output, "problems") <- NULL
 
 expect_identical(actual_output, expected_output)
+
+}
