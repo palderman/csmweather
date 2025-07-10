@@ -684,3 +684,32 @@ no_missing <- structure(list(
       fill_data = no_missing[, c("DATE", "SRAD", "TMAX", "TMIN")])
 
   expect_identical(actual_output, expected_output, info = "method = NULL")
+
+  for(nm in setdiff(names(with_missing), "DATE")){
+    if(nm == "DEWP"){
+      expected_output[[nm]] <- with_missing[["DEWP"]]
+      expected_output[[nm]][is.na(expected_output[[nm]])] <-
+        with_missing[["TMIN"]][is.na(expected_output[[nm]])]
+    }else if(nm == "TMIN"){
+      expected_output[[nm]] <- with_missing[["TMIN"]]
+      expected_output[[nm]][is.na(expected_output[[nm]])] <-
+        with_missing[["DEWP"]][is.na(expected_output[[nm]])]
+    }else if(nm == "RAIN"){
+      expected_output[[nm]] <- with_missing[[nm]]
+      expected_output[[nm]][is.na(expected_output[[nm]])] <- 0
+    }else if(nm %in% c("SRAD", "TMAX")){
+      expected_output[[nm]] <- no_missing[[nm]]
+    }else{
+      expected_output[[nm]] <- csmweather::wth_interpolate(with_missing[[nm]],
+                                                           method = "linear")
+    }
+  }
+
+  actual_output <-
+    csmweather::wth_fill_missing(
+      with_missing,
+      fill_data = no_missing[, c("DATE", "SRAD", "TMAX")],
+      method = list(DEWP = expression(TMIN),
+                    TMIN = ~DEWP))
+
+  expect_identical(actual_output, expected_output, info = "method = list(DEWP = expression(TMIN), TMIN = ~DEWP)")

@@ -18,6 +18,9 @@
 #'   fill_data ("data"), if provided, assume zero for rainfall (0) and then to
 #'   linearly interpolate remaining variables ("linear").
 #'
+#' @param fill_columns a character vector of columns from wth_data with missing
+#'  values that should be filled. The default is to fill all non date columns.
+#'
 #' @param rain_column a character string containing the name of the rain column
 #'  within wth_data
 #'
@@ -27,9 +30,10 @@
 #' @export
 #'
 wth_fill_missing <- function(wth_data, fill_data = NULL, method = NULL,
+                             fill_columns = setdiff(names(wth_data), date_column),
                              rain_column = "RAIN", date_column = "DATE"){
 
-  for(nm in setdiff(names(wth_data), names(method))){
+  for(nm in setdiff(fill_columns, names(method))){
     if(nm %in% names(fill_data)){
       method[[nm]] <- "data"
     }else if(nm == rain_column){
@@ -41,8 +45,16 @@ wth_fill_missing <- function(wth_data, fill_data = NULL, method = NULL,
 
   data_out <- wth_data[order(wth_data[[date_column]]), ]
 
-  for(nm in setdiff(names(wth_data), date_column)){
-    if(is.numeric(method[[nm]])){
+  for(nm in fill_columns){
+    if(is.expression(method[[nm]])){
+      data_out[[nm]][is.na(data_out[[nm]])] <-
+        data_out[is.na(data_out[[nm]]), ] |>
+        with(expr = eval(method[[nm]]))
+    }else if("formula" %in% class(method[[nm]])){
+      data_out[[nm]][is.na(data_out[[nm]])] <-
+        data_out[is.na(data_out[[nm]]), ] |>
+        with(expr = eval(as.list(method[[nm]])[[2]]))
+    }else if(is.numeric(method[[nm]])){
       data_out[[nm]][is.na(data_out[[nm]])] <- method[[nm]]
     }else if(method[[nm]] %in% c("linear", "spline")){
       data_out[[nm]] <- wth_interpolate(data_out[[nm]], method = method[[nm]])
