@@ -8,6 +8,7 @@ wth_fill_missing(
   wth_data,
   fill_data = NULL,
   method = NULL,
+  fill_columns = setdiff(names(wth_data), date_column),
   rain_column = "RAIN",
   date_column = "DATE"
 )
@@ -27,6 +28,9 @@ character string indicating the method to be used (i.e. "linear", "spline" or "d
 For any column not listed, the default is to use the matching column from
 fill_data ("data"), if provided, assume zero for rainfall (0) and then to
 linearly interpolate remaining variables ("linear").}
+
+\item{fill_columns}{a character vector of columns from wth_data with missing
+values that should be filled. The default is to fill all non date columns.}
 
 \item{rain_column}{a character string containing the name of the rain column
 within wth_data}
