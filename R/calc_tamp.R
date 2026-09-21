@@ -10,7 +10,7 @@ utils::globalVariables(c("DATE", "TMAX", "TMIN", "MM", "TAIR", "TAVG",
 #'
 calc_tamp <- function(wth){
 
-  tamp <- wth |>
+  wth |>
     within({
       # Create month column
       MM = format(DATE, "%m")
@@ -26,5 +26,4 @@ calc_tamp <- function(wth){
     range() |>
     diff()
 
-  return(tamp/2)
 }
